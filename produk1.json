@@ -1,0 +1,49 @@
+{
+	
+
+		"nama":{
+				"nama":["produk1","produk2","produk1","produk2"]
+		},
+	"produk":{
+			"produk1":[
+				"Avarian1","Avarian2","Avarian3","Avarian4","Avarian5"],
+				
+			
+
+			
+			"produk2":[
+				"Bvarian1","Bvarian2","Bvarian3"]
+				
+			
+
+	},
+	"deskripsi":{
+		"Avarian1":" anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Avarian2":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Avarian3":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Avarian4":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Avarian5":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Bvarian1":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Bvarian2":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi",
+		"Bvarian3":"anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi anggap saja ini deskripsi"
+
+	},
+	"gambar":{
+		"nama":["img/1.png","img/1.png","img/1.png","img/1.png"],
+
+
+
+		"Avarian1":"img/1.png",
+		"Avarian2":"img/1.png",
+		"Avarian3":"img/1.png",
+		"Avarian4":"img/1.png",
+		"Avarian5":"img/1.png",
+		"Bvarian1":"img/1.png",
+		"Bvarian2":"img/1.png",
+		"Bvarian3":"img/1.png"
+	}
+
+
+
+	
+}

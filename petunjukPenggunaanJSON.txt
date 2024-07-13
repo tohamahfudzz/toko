@@ -1,0 +1,5 @@
+untuk mengambil data produk.produk1 maka hal pertama yang harus dilakukan adalah 
+menangkap dimana element yang memiliki isian berupa nama.nama[array] lalu digunakan
+sebagai acuan dengan cara memasukkanya kedalam variabel 
+misalnya var a=(isi dari element yang memiliki data dari nama.nama[array])
+lalu menggunakanya pada perulangan dengan produk.a[array]
