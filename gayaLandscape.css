@@ -1,0 +1,122 @@
+ body{
+ 	background-image: url('icon/backgroundTinggi2.jpg');
+ /*	background-repeat: no-repeat;*/
+ 	background-size: 100%;
+
+
+ }
+#mode{
+	background-image: url('icon/day.png');
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 100px;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+}
+
+.nama{
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+	margin-bottom: 5%;
+}
+ h1{
+	/*text-align: center;
+		margin-right: 50%;
+	margin-left: 50%;*/
+	font-size: 30px;
+	
+	font-family: courier;
+}
+.nama img{
+	/*margin-right: 50%;
+	margin-left: 50%;*/
+	width: 150px;
+	height: 150px;
+	
+}
+.kategori{
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 90vw;
+	height: auto;
+
+}
+
+.kategori div{
+	font-family: courier;
+	font-size: 30px;
+	display: flex;
+	flex-direction: column;
+/*	margin-left: 0;
+	margin-right: 5px;*/
+	padding: 0;
+	margin: 5%;
+
+
+}
+
+
+.kategori img{
+	margin-left: 25%;
+	width: 150px;
+	height: 150px;
+
+}
+.kategori button{
+	background-image: url('icon/masuk.png');
+
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+}
+
+#social{
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:center;
+	
+	width: 90vw;
+}
+
+#social div{
+	margin: 0;
+	padding: 0;
+	margin: 3%;
+	width: 100px;
+	height: 100px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#social div:nth-child(1){
+	
+	background-image: url('icon/facebook.png');
+	
+}
+
+#social div:nth-child(2){
+
+	background-image: url('icon/wa.png');
+	}
+
+	#social div:nth-child(3){
+
+	background-image: url('icon/tiktok.png');
+	}
+
+	#social div:nth-child(4){
+
+	background-image: url('icon/instagram.png');
+	}

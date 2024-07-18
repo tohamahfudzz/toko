@@ -1,0 +1,150 @@
+ body{
+ 	background-image: url('icon/backgroundTinggi2.jpg');
+ /*	background-repeat: no-repeat;*/
+ 	background-size: 100%;
+
+
+ }
+#mode{
+	background-image: url('icon/day.png');
+	background-repeat: no-repeat;
+	width: 300px;
+	height: 300px;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+}
+
+.nama{
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+	margin-bottom: 20%;
+}
+ h1{
+	/*text-align: center;
+		margin-right: 50%;
+	margin-left: 50%;*/
+	font-size: 70px;
+	
+	font-family: courier;
+}
+.nama img{
+	/*margin-right: 50%;
+	margin-left: 50%;*/
+	width: 300px;
+	height: 300px;
+	
+}
+.kategori{
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 90vw;
+	height: auto;
+
+}
+
+.kategori div{
+	font-family: courier;
+	font-size: 50px;
+	display: flex;
+	flex-direction: column;
+/*	margin-left: 0;
+	margin-right: 5px;*/
+	padding: 0;
+	margin: 5%;
+
+
+}
+
+
+.kategori img{
+	margin-left: 25%;
+	width: 200px;
+	height: 200px;
+
+}
+.kategori button{
+	background-image: url('icon/masuk.png');
+
+	width: 100px;
+	height: 100px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+}
+
+#social{
+	margin-top: 20%;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content:center;
+	
+	width: 90vw;
+}
+
+#social div{
+	margin: 0;
+	padding: 0;
+	margin: 5%;
+	width: 120px;
+	height: 120px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#social div:nth-child(1){
+	
+	background-image: url('icon/facebook.png');
+	
+}
+
+#social div:nth-child(2){
+
+	background-image: url('icon/wa.png');
+	}
+
+	#social div:nth-child(3){
+
+	background-image: url('icon/tiktok.png');
+	}
+
+	#social div:nth-child(4){
+
+	background-image: url('icon/instagram.png');
+	}
+
+/*	@media(min-width: 600px){
+		.nama{
+			margin-bottom: 5%;
+		}
+			.nama img{
+				width: 150px;
+				height: 150px;
+			}
+	
+			.kategori img{
+				width: 150px;
+				height: 150px;
+
+			}
+			#social div{
+				width: 100px;
+				height: 100px;
+				margin: 3%;
+			}
+
+
+	}	*/
+	/*	.kategori div{
+				margin: 0;
+				padding-right: 6%;
+			}*/
