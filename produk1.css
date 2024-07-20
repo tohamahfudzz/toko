@@ -1,0 +1,144 @@
+
+body{
+	background-image: url('icon/backgroundTinggi1.jpg');
+	background-size: 100%;
+
+}
+/*style di body*/
+h1{
+	text-align: center;
+	font-family: courier;
+	font-size: 80px;
+}
+#back{
+
+	z-index: 1;
+	position: absolute;
+	background-image: url('icon/home.png');
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+
+}
+
+
+
+
+/*class container*/
+.container{
+	margin-top: 5%;
+	display: flex;
+	flex-wrap: wrap;
+	/*width: 370px;*/
+	width: 90vw;
+	height: auto;
+	z-index: 1;
+	position: absolute;
+}
+.container div{
+	border-radius: 10px;
+		background-image: url('icon/bacgroundTransparan.png');
+	background-size: 100%;
+	
+	background-color: #c3c3c3;
+	margin:10px;
+	width: 200px;
+	height: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+
+}
+.container div img{
+	margin-left: 25%;
+width: 150px;
+height: 150px;
+
+}
+.container div button{
+	background-image: url('icon/masuk.png');
+	width: 70px;
+	height: 70px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+}
+.container div p{
+	text-align: center;
+	font-family: courier;
+	font-size: 30px;
+	margin:0;
+	padding: 0;
+}
+
+
+
+/*class template*/
+.template{
+	border-radius: 10px;
+	background-image: url('icon/bacgroundTransparan.png');
+	background-size: 100%;
+	background-color: #ffffff;
+	display: flex;
+	flex-wrap: wrap;
+	/*grid-template-columns: repeat(auto-fill,150px);*/
+	/*grid-auto-rows: 150px;
+	grid-gap: 0;*/
+	height: auto;
+	width:90vw;
+		/*justify-content: space-between;*/
+	/*width: 360px;*/
+	/*height: 500px;*/
+	
+	z-index: 2;
+	position: absolute;
+		margin: 0 auto;
+	padding: 0;
+}
+.template div{
+	/*box-sizing: border-box;*/
+
+	/*background-color: #919191;*/
+	border-radius: 10px;
+		background-image: url('icon/bacgroundTransparan.png');
+		background-size: 100%;
+	
+	margin: 10px;
+	background-color: #c3c3c3;	
+	width:250px;
+	height: auto;
+	/*height: 200px;*/
+
+}
+.template div img{
+	margin-left: 25%;
+	width: 150px;
+	height: 150px;
+	
+}
+.template div p{
+	font-family: courier;
+	text-align: center;
+	font-size: 40px;
+
+}
+.template button{
+	width: 100px;
+	height: 100px;
+	margin-top: 10%;
+	background-image: url('icon/back.png');
+
+	background-repeat: no-repeat;
+	background-size: 100%;
+	border:none;
+	background-color: transparent;
+}
+ @media(min-width: 600px){
+ 			.template button{
+ 				margin-top: 25%
+ 			}
+ }
