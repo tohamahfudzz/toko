@@ -8,7 +8,7 @@ if (empty($_SESSION['user_id'])) {
 }
 
 include "koneksi.php";
-
+include "log_activity.php";
 $errors = [];
 $success = null;
 
@@ -163,6 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'uploa
 
             if ($stmt->execute()) {
                 $stmt->close();
+                 log_activity($conn, $_SESSION['username'], "Tambah produk: $nama");
                 header("Location: " . $self . "?uploaded=1");
                 exit;
             }
@@ -187,6 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $stmt->close();
+                 log_activity($conn, $_SESSION['username'], "Hapus produk ID: $id");
                 header("Location: " . $self . "?deleted=1");
                 exit;
             }
@@ -267,6 +269,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
 
                 if ($stmt->execute()) {
                     $stmt->close();
+                     log_activity($conn, $_SESSION['username'], "Update produk ID: $id (dengan gambar)");
+
                     header("Location: " . $self . "?updated=1");
                     exit;
                 }
@@ -282,6 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
                 $stmt->bind_param("sissi", $nama, $harga, $deskripsi, $kategori, $id);
                 if ($stmt->execute()) {
                     $stmt->close();
+                     log_activity($conn, $_SESSION['username'], "Update produk ID: $id");
                     header("Location: " . $self . "?updated=1");
                     exit;
                 }
@@ -397,8 +402,11 @@ if ($listStmt) {
       <div style="margin-top:6px;">📁 Gambar disimpan langsung ke kolom <code>gambar</code> (MEDIUMBLOB)</div>
       <div style="margin-top:6px;">ℹ️ Hanya file WEBP yang diterima</div>
     </div>
-  </div>
-
+  </div>                 
+     <!-- container -->
+<div class="action">
+    <a class="button" href="activity.php"> lihat aktifitas </a>
+</div>
   <hr>
 
   <h3>Cari Produk</h3>
