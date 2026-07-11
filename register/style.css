@@ -1,0 +1,235 @@
+/* register/style.css
+   Tema konsisten dengan style utama (slideshow/produk)
+   Gunakan bersama file CSS utama atau sebagai file terpisah untuk halaman register
+*/
+
+:root {
+    --max-width: 1100px;
+    --primary: #0b74de;
+    --accent: #25D366;
+    --bg-card: #ffffff;
+    --muted: #6b7280;
+    --radius: 10px;
+    --shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+    --glass: rgba(255, 255, 255, 0.85);
+    --input-height: 44px;
+    --input-padding: 10px 12px;
+    --danger: #ef4444;
+}
+
+/* Reset kecil khusus halaman register */
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #111827;
+    background: url('../background/background.png') center/cover no-repeat fixed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+}
+
+/* Card utama register */
+.register {
+    width: 100%;
+    max-width: 420px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.88));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    border: 1px solid rgba(11, 116, 222, 0.04);
+}
+
+/* Judul halaman (jika ada di dalam card) */
+.register h2 {
+    margin: 0 0 14px 0;
+    font-size: 18px;
+    color: var(--primary);
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+/* Label */
+.register label {
+    display: block;
+    font-size: 14px;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+/* Input umum */
+.register input[type="text"],
+.register input[type="password"],
+.register input[type="email"],
+.register input[type="tel"],
+.register textarea {
+    width: 100%;
+    height: var(--input-height);
+    padding: var(--input-padding);
+    border-radius: 8px;
+    border: 1px solid #e6e9ef;
+    background: #fff;
+    font-size: 14px;
+    color: #111827;
+    transition: box-shadow .12s ease, border-color .12s ease;
+    box-sizing: border-box;
+}
+
+.register textarea {
+    height: auto;
+    min-height: 100px;
+    padding: 10px;
+    resize: vertical;
+}
+
+/* Fokus input */
+.register input:focus,
+.register textarea:focus {
+    outline: none;
+    border-color: rgba(11, 116, 222, 0.28);
+    box-shadow: 0 8px 20px rgba(11, 116, 222, 0.06);
+}
+
+/* Group untuk password + toggle */
+.register .input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.register .input-row input {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+}
+
+/* Tombol toggle mata */
+.register .input-row button {
+    flex: 0 0 44px;
+    height: var(--input-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid #e6e9ef;
+    background: #f7fbff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Tombol submit */
+.register .tombol,
+.register input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 14px;
+    background: linear-gradient(90deg, var(--primary), #0a63b8);
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(11, 116, 222, 0.08);
+    transition: transform .08s ease, box-shadow .12s ease;
+}
+
+.register .tombol:hover,
+.register input[type="submit"]:hover {
+    transform: translateY(-2px);
+}
+
+.register .tombol:active,
+.register input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Pesan status */
+.register .msg {
+    margin: 10px auto 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.register .msg.success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #bbf7d0;
+}
+
+.register .msg.error {
+    background: #fff1f2;
+    color: var(--danger);
+    border: 1px solid #fecaca;
+}
+
+/* Bantuan teks kecil */
+.register .hint {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+}
+
+/* Link kecil */
+.register a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width:480px) {
+    body {
+        padding: 18px;
+    }
+
+    .register {
+        padding: 16px;
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    .register input[type="text"],
+    .register input[type="password"] {
+        height: 40px;
+    }
+
+    .register .input-row button {
+        height: 40px;
+        flex: 0 0 40px;
+        font-size: 16px;
+    }
+
+    .register .tombol {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Small utility */
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}

@@ -1,0 +1,743 @@
+/* ==============================================
+   style.css — Comp Store  (revisi tampilan)
+   Perbaikan: tipografi, spacing, card, filter,
+   pagination, galeri, login, register
+   ============================================== */
+
+/* -------------------------
+   Import Font
+   ------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+img { max-width: 100%; display: block; }
+
+/* -------------------------
+   CSS Variables
+   ------------------------- */
+:root {
+  --max-width: 1440px;
+  --primary: #1a6fe8;
+  --primary-dark: #1255c4;
+  --primary-light: #e8f0fd;
+  --accent: #22c55e;
+  --accent-dark: #16a34a;
+  --bg-page: #f0f4f8;
+  --bg-card: #ffffff;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  --border: #e5e7eb;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.10);
+  --transition: .22s cubic-bezier(.4,0,.2,1);
+}
+
+/* -------------------------
+   Reset & Base
+   ------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: var(--bg-page) url('background/background.png') center/cover no-repeat fixed;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  /* HAPUS align-items:center — penyebab footer menyempit */
+  /* Centering dilakukan per-elemen dengan margin:0 auto */
+  gap: 20px;
+  padding-bottom: 48px;
+}
+
+/* Semua child body di-center dengan margin auto, bukan align-items */
+body > * {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+/* Footer & elemen full-width: override max-width supaya benar-benar 100% */
+body > .footer,
+body > footer {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+/* Floating WA button: lepas dari flow flex body */
+body > .wa-float {
+  max-width: none;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+button, a { transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition); }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* -------------------------
+   Header
+   ------------------------- */
+.main-header {
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 14px;
+  z-index: 100;
+}
+
+.logo-section { display: flex; align-items: center; gap: 14px; }
+
+.logo-icon {
+  width: 52px; height: 52px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 26px;
+  box-shadow: 0 4px 14px rgba(26,111,232,.35);
+  flex-shrink: 0;
+}
+
+.logo-text h1 {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  color: var(--text-main);
+}
+.logo-text span { color: var(--text-muted); font-size: 12px; font-weight: 500; }
+
+.hamburger {
+  width: 46px; height: 46px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  cursor: pointer; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hamburger:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: rotate(90deg); }
+
+/* -------------------------
+   Slideshow
+   ------------------------- */
+.slideshow-wrapper {
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.slideshow-inner {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.slideshow-container { width: 100%; position: relative; }
+
+.slide-item {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  display: none;
+}
+.slide-item.show { display: block; animation: fadeIn .45s ease; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.slides {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+
+.slide-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; padding-left: 72px;
+  color: #fff;
+  background: linear-gradient(90deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.4) 40%, rgba(0,0,0,0) 72%);
+  z-index: 2; pointer-events: none;
+}
+.slide-overlay h2 { font-size: 44px; font-weight: 700; max-width: 520px; line-height: 1.15; }
+.slide-overlay p { font-size: 17px; margin-top: 10px; color: rgba(255,255,255,.85); }
+.slide-overlay a {
+  margin-top: 26px; width: 190px; text-align: center;
+  padding: 13px 0; background: var(--primary); color: #fff;
+  text-decoration: none; border-radius: var(--radius-md);
+  font-weight: 600; font-size: 15px;
+  pointer-events: auto;
+  box-shadow: 0 4px 14px rgba(26,111,232,.4);
+}
+.slide-overlay a:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+.prev, .next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 50px; height: 50px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; border-radius: 50%;
+  background: rgba(255,255,255,.20);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: #fff; font-size: 22px; font-weight: 700;
+  cursor: pointer; z-index: 20;
+}
+.prev { left: 18px; }
+.next { right: 18px; }
+.prev:hover, .next:hover { background: rgba(26,111,232,.85); transform: translateY(-50%) scale(1.08); }
+
+.dot-container { display: flex; justify-content: center; gap: 8px; }
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%; background: rgba(255,255,255,.5);
+  border: none; cursor: pointer; padding: 0;
+  transition: width var(--transition), background var(--transition), border-radius var(--transition);
+}
+.dot.active { width: 36px; border-radius: 20px; background: var(--primary); }
+
+/* -------------------------
+   Section Titles
+   ------------------------- */
+.section-header {
+  width: 100%; max-width: var(--max-width);
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 12px; flex-wrap: wrap; padding: 0 4px;
+}
+.section-title { font-size: 30px; font-weight: 700; color: var(--text-main); }
+.section-subtitle { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
+
+/* -------------------------
+   Kategori
+   ------------------------- */
+.kategori {
+  width: 100%; max-width: var(--max-width);
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.kategori-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.kategori-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; min-height: 100px;
+  background: #f8faff;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  text-decoration: none; color: var(--text-main);
+  font-size: 22px;
+  padding: 14px 8px;
+  transition: all var(--transition);
+}
+.kategori-item span { font-size: 13px; font-weight: 600; text-align: center; }
+.kategori-item:hover {
+  transform: translateY(-4px);
+  background: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(26,111,232,.14);
+  color: var(--primary);
+}
+.kategori-item.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgba(26,111,232,.35);
+}
+.kategori-item.active span { color: #fff; }
+
+/* -------------------------
+   Produk Grid
+   ------------------------- */
+.produk-wrapper {
+  width: 100%; max-width: var(--max-width);
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+.produk-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 22px;
+  padding: 0 4px;
+}
+
+/* -------------------------
+   Card
+   ------------------------- */
+.card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+.card-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 3;
+  padding: 5px 11px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 700; color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+.badge-bestseller { background: #f59e0b; }
+.badge-new { background: #8b5cf6; }
+.badge-promo { background: #ef4444; }
+
+.gambar-produk {
+  width: 100%; height: 210px;
+  object-fit: contain; background: #f8f9fb;
+  padding: 20px;
+  transition: transform .35s ease;
+}
+.card:hover .gambar-produk { transform: scale(1.04); }
+
+.card-body {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 18px 8px;
+  flex: 1;
+}
+
+.card h3 { font-size: 16px; font-weight: 600; line-height: 1.35; }
+.kategori-label { color: var(--text-muted); font-size: 13px; }
+
+.card-rating { display: flex; align-items: center; gap: 7px; margin-top: 2px; }
+.stars { font-size: 13px; letter-spacing: 1px; }
+.rating-val { font-size: 13px; color: #4b5563; font-weight: 700; }
+
+.harga { margin: 4px 0 0; color: var(--primary); font-size: 22px; font-weight: 700; }
+.deskripsi { color: var(--text-muted); font-size: 13px; line-height: 1.55; flex: 1; }
+
+.card-info { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; padding-bottom: 4px; }
+.info-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: #f3f4f6; color: #374151;
+  border-radius: 999px; padding: 6px 10px;
+  font-size: 12px; font-weight: 600;
+}
+
+/* -------------------------
+   Buttons
+   ------------------------- */
+.btn-beli {
+  display: block; margin: 14px 18px 18px;
+  background: var(--accent); color: #fff;
+  text-decoration: none; padding: 12px;
+  border-radius: var(--radius-md);
+  font-weight: 600; font-size: 14.5px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(34,197,94,.3);
+}
+.btn-beli:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(34,197,94,.4); }
+
+.btn-lihat {
+  display: inline-block;
+  background: var(--primary); color: #fff;
+  padding: 10px 18px; border-radius: var(--radius-md);
+  text-decoration: none; font-weight: 600; font-size: 14px;
+  box-shadow: 0 3px 10px rgba(26,111,232,.25);
+}
+.btn-lihat:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+/* -------------------------
+   Produk.php — Filter & Search
+   ------------------------- */
+.filter-area {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  align-items: center; justify-content: center;
+  margin: 14px 0;
+}
+.filter-area select,
+.filter-area input[type="text"] {
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff; color: var(--text-main);
+  font-size: 14px; font-family: inherit;
+  transition: border-color var(--transition);
+}
+.filter-area select:focus, .filter-area input[type="text"]:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26,111,232,.1);
+}
+.filter-area button {
+  padding: 9px 18px;
+  background: var(--primary); color: #fff;
+  border: none; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: 14px; cursor: pointer;
+}
+.filter-area button:hover { background: var(--primary-dark); }
+
+header .search-form {
+  display: flex; gap: 8px; align-items: center;
+  margin-top: 14px; flex-wrap: wrap; justify-content: center;
+}
+header .search-form input[type="text"] {
+  padding: 9px 16px; width: min(320px, 100%);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); background: #fff;
+  font-size: 14px; font-family: inherit;
+}
+header .search-form input[type="text"]:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26,111,232,.1);
+}
+header .search-form button {
+  padding: 9px 18px; background: var(--primary);
+  color: #fff; border: none; border-radius: var(--radius-sm);
+  font-weight: 600; cursor: pointer;
+}
+header .search-form button:hover { background: var(--primary-dark); }
+
+/* -------------------------
+   Produk.php — header area
+   ------------------------- */
+.produk-header-page {
+  width: 100%; max-width: var(--max-width);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: 28px 32px;
+  text-align: center;
+  margin-top: 16px;
+}
+.produk-header-page h1 { font-size: 28px; font-weight: 700; }
+.produk-header-page p { color: var(--text-muted); margin-top: 6px; }
+
+/* -------------------------
+   Pagination
+   ------------------------- */
+.pagination {
+  display: flex; gap: 6px; align-items: center;
+  justify-content: center; flex-wrap: wrap;
+  margin: 24px 0 8px;
+}
+.pagination a {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 38px; height: 38px; padding: 0 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-decoration: none; color: var(--text-main);
+  font-weight: 600; font-size: 14px; background: #fff;
+  transition: all var(--transition);
+}
+.pagination a:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+.pagination a.active {
+  background: var(--primary); color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 3px 10px rgba(26,111,232,.3);
+}
+
+/* -------------------------
+   Gallery / Galeri
+   ------------------------- */
+.galeri-container {
+  width: 100%; max-width: var(--max-width);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 0 4px;
+}
+.galeri-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.galeri-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.galeri-card img {
+  width: 100%; height: 200px;
+  object-fit: cover; display: block;
+  background: #f8f9fb;
+  transition: transform .35s ease;
+}
+.galeri-card:hover img { transform: scale(1.05); }
+.galeri-card-body { padding: 12px 16px; }
+.galeri-card-body h3 { font-size: 14px; font-weight: 600; color: var(--text-main); text-align: center; }
+
+/* -------------------------
+   Sidebar
+   ------------------------- */
+.sidebar {
+  position: fixed; top: 0; right: -380px;
+  width: 340px; height: 100vh;
+  background: var(--bg-card);
+  box-shadow: -10px 0 40px rgba(0,0,0,.14);
+  transition: right .3s cubic-bezier(.4,0,.2,1);
+  z-index: 999; padding: 28px;
+  display: flex; flex-direction: column;
+  border-left: 1px solid var(--border);
+}
+.sidebar.show { right: 0; }
+
+.close-btn {
+  align-self: flex-end; border: 1.5px solid var(--border);
+  background: none; font-size: 22px; cursor: pointer;
+  padding: 4px 10px; border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+.close-btn:hover { background: #f3f4f6; color: var(--text-main); }
+
+.sidebar-logo { display: flex; flex-direction: column; align-items: center; margin: 24px 0 28px; }
+.sidebar-icon {
+  width: 68px; height: 68px; border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 34px; margin-bottom: 12px;
+  box-shadow: 0 6px 20px rgba(26,111,232,.3);
+}
+.sidebar-logo h2 { font-size: 22px; font-weight: 700; }
+.sidebar-logo span { color: var(--text-muted); font-size: 13px; }
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 8px; }
+.menu-btn {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; border-radius: var(--radius-md);
+  text-decoration: none; color: var(--text-main);
+  background: #f8faff; border: 1px solid transparent;
+  font-size: 15px; font-weight: 500; cursor: pointer; width: 100%; text-align: left;
+}
+.menu-btn:hover { background: var(--primary-light); color: var(--primary); border-color: rgba(26,111,232,.2); transform: translateX(4px); }
+
+.account-info {
+  background: #f8faff; border: 1px solid var(--border);
+  border-radius: var(--radius-md); color: var(--text-main);
+  margin-top: 8px;
+}
+.sidebar-footer { margin-top: auto; text-align: center; color: var(--text-light); font-size: 13px; padding-top: 16px; }
+
+/* -------------------------
+   Footer — FULL WIDTH FIX
+   Masalah: body pakai align-items:center membuat
+   footer ikut menyempit. Solusi: align-self:stretch
+   + width/max-width override.
+   ------------------------- */
+.footer {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  background: #111827;
+  color: #fff;
+  margin-top: 24px;
+}
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 44px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+.footer-brand { display: flex; align-items: center; gap: 16px; }
+.footer-logo {
+  width: 58px; height: 58px; border-radius: 16px;
+  background: var(--primary);
+  display: flex; justify-content: center; align-items: center;
+  font-size: 28px; flex-shrink: 0;
+}
+.footer-brand h2 { font-size: 21px; font-weight: 700; }
+.footer-brand p { margin: 4px 0 0; color: #9ca3af; font-size: 14px; }
+
+.footer-menu { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-menu a { color: #d1d5db; text-decoration: none; font-size: 14px; font-weight: 500; }
+.footer-menu a:hover { color: #fff; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  text-align: center;
+  padding: 18px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* -------------------------
+   "Lihat Semua" nav block
+   ------------------------- */
+.lihat-semua {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  justify-content: center; margin: 20px 0;
+}
+
+/* -------------------------
+   Produk.php — header layout override
+   ------------------------- */
+body > header {
+  width: 100%; max-width: var(--max-width);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: 28px 32px;
+  text-align: center;
+  margin-top: 16px;
+}
+body > header h1,
+body > header h2 {
+  font-size: 28px; font-weight: 700; color: var(--text-main);
+}
+
+/* -------------------------
+   Floating WhatsApp Button
+   (dipakai index.php & galery.php)
+   ------------------------- */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  /* Jangan ikut flex body */
+  width: auto !important;
+  max-width: none !important;
+  align-self: auto;
+}
+.wa-float-tooltip {
+  background: #111827;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity .2s, transform .2s;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,.18);
+}
+.wa-float:hover .wa-float-tooltip { opacity: 1; transform: translateX(0); }
+.wa-float-btn {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 22px rgba(34,197,94,.5);
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  animation: wa-pulse 2.5s infinite;
+}
+.wa-float-btn:hover { transform: scale(1.12); box-shadow: 0 8px 30px rgba(34,197,94,.65); }
+@keyframes wa-pulse {
+  0%,100% { box-shadow: 0 6px 22px rgba(34,197,94,.5); }
+  50%      { box-shadow: 0 6px 32px rgba(34,197,94,.8); }
+}
+
+/* -------------------------
+   Responsive
+   ------------------------- */
+@media (max-width: 1024px) {
+  .slide-item { height: 340px; }
+  .slide-overlay h2 { font-size: 34px; }
+}
+
+@media (max-width: 768px) {
+  body { gap: 14px; padding-bottom: 28px; }
+
+  .main-header { margin-top: 10px; padding: 12px 16px; border-radius: var(--radius-lg); top: 10px; }
+  .logo-text h1 { font-size: 18px; }
+  .logo-text span { display: none; }
+  .logo-icon { width: 44px; height: 44px; font-size: 22px; }
+  .hamburger { width: 42px; height: 42px; font-size: 20px; }
+
+  .slide-item { height: 220px; }
+  .slide-overlay { padding-left: 24px; }
+  .slide-overlay h2 { font-size: 24px; max-width: 260px; }
+  .slide-overlay p { font-size: 14px; }
+  .slide-overlay a { margin-top: 16px; width: 150px; padding: 10px; font-size: 13px; }
+  .prev, .next { display: none; }
+
+  .kategori { border-radius: var(--radius-lg); padding: 16px; }
+  .kategori-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .kategori-item { min-height: 80px; }
+  .kategori-item span { font-size: 12px; }
+
+  .produk-container { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .gambar-produk { height: 170px; }
+  .card h3 { font-size: 14.5px; }
+  .harga { font-size: 18px; }
+  .btn-beli { margin: 12px 14px; padding: 11px; font-size: 13.5px; }
+
+  .galeri-container { grid-template-columns: repeat(2, 1fr); }
+
+  .sidebar { width: 100%; right: -100%; }
+  .sidebar.show { right: 0; }
+
+  .section-title { font-size: 22px; }
+  .footer-content { flex-direction: column; align-items: flex-start; padding: 28px 20px; }
+  .footer-menu { gap: 14px; }
+
+  .wa-float { bottom: 20px; right: 16px; }
+  .wa-float-btn { width: 52px; height: 52px; }
+}
+
+@media (max-width: 480px) {
+  .slide-item { height: 170px; }
+  .slide-overlay h2 { font-size: 19px; }
+  .slide-overlay a { display: none; }
+
+  .kategori-grid { grid-template-columns: repeat(3, 1fr); }
+  .kategori-item { min-height: 72px; font-size: 18px; }
+
+  .produk-container { grid-template-columns: 1fr; }
+  .galeri-container { grid-template-columns: 1fr; }
+
+  .logo-text h1 { font-size: 16px; }
+  .section-title { font-size: 20px; }
+
+  body > header { border-radius: var(--radius-lg); padding: 20px 18px; }
+  .produk-header-page { border-radius: var(--radius-lg); padding: 20px 18px; }
+
+  .wa-float-btn { width: 48px; height: 48px; }
+}
+
+/* -------------------------
+   Utility
+   ------------------------- */
+.text-center { text-align: center; }
+.hidden { display: none; }
+.muted { color: var(--text-muted); font-size: 13px; }

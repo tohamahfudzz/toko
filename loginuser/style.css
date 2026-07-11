@@ -1,0 +1,255 @@
+/* ==============================================
+   style.css — Comp Store Auth Pages
+   Dipakai oleh: login/index.php, loginuser/index.php
+   ============================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #1a6fe8;
+  --primary-dark: #1255c4;
+  --primary-light: #e8f0fd;
+  --accent: #22c55e;
+  --bg: linear-gradient(135deg, #dbeafe 0%, #eff6ff 45%, #f0f9ff 100%);
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --error-bg: #fef2f2;
+  --error-border: #fecaca;
+  --error-text: #dc2626;
+  --success-bg: #f0fdf4;
+  --success-border: #bbf7d0;
+  --success-text: #16a34a;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(0,0,0,.10);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* -------------------------
+   Card
+   ------------------------- */
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card);
+  padding: 36px 32px;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,.6);
+}
+
+/* -------------------------
+   Header area
+   ------------------------- */
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.logo-icon {
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; color: #fff;
+  box-shadow: 0 6px 20px rgba(26,111,232,.35);
+  margin-bottom: 14px;
+}
+
+h2 {
+  margin: 0 0 4px;
+  text-align: center;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+}
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* -------------------------
+   Form elements
+   ------------------------- */
+label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  transition: border-color .2s, box-shadow .2s;
+  height: 46px;
+  line-height: 1.2;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26,111,232,.12);
+}
+
+textarea { min-height: 100px; resize: vertical; height: auto; }
+
+/* Input group (password + toggle) */
+.input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 0;
+}
+.input-group input[type="password"],
+.input-group input[type="text"] {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  height: 46px;
+}
+.input-group button {
+  flex: 0 0 46px;
+  height: 46px;
+  width: 46px;
+  margin-top: 0;
+  padding: 0;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: #f8faff;
+  cursor: pointer;
+  font-size: 19px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: all .2s;
+}
+.input-group button:hover { background: var(--primary-light); border-color: var(--primary); color: var(--primary); transform: none; }
+
+/* Submit button */
+button[type="submit"],
+input[type="submit"] {
+  margin-top: 22px;
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15.5px;
+  font-family: inherit;
+  box-shadow: 0 4px 14px rgba(26,111,232,.35);
+  transition: opacity .2s, transform .15s;
+}
+button[type="submit"]:hover,
+input[type="submit"]:hover { opacity: .92; transform: translateY(-2px); }
+button[type="submit"]:active,
+input[type="submit"]:active { transform: translateY(0); }
+button[type="submit"]:disabled,
+input[type="submit"]:disabled {
+  background: linear-gradient(135deg, #93c5fd, #60a5fa);
+  cursor: not-allowed;
+  opacity: .8;
+  transform: none;
+}
+
+/* -------------------------
+   Messages
+   ------------------------- */
+.errors {
+  background: var(--error-bg);
+  border: 1.5px solid var(--error-border);
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+.errors ul { margin: 0; padding-left: 18px; color: var(--error-text); font-size: 14px; }
+
+.success {
+  text-align: center;
+  color: var(--success-text);
+  background: var(--success-bg);
+  border: 1.5px solid var(--success-border);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* -------------------------
+   Helper / links area
+   ------------------------- */
+.auth-links {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+.auth-links a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-links a:hover { text-decoration: underline; }
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+hr {
+  margin: 22px 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+code {
+  background: #f0f9ff;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--primary);
+}
+
+/* -------------------------
+   Responsive
+   ------------------------- */
+@media (max-width: 480px) {
+  body { padding: 16px; }
+  .container { padding: 28px 22px; border-radius: 18px; }
+  h2 { font-size: 20px; }
+  .logo-icon { width: 56px; height: 56px; font-size: 26px; }
+  .input-group button { flex: 0 0 42px; height: 42px; font-size: 17px; }
+  input[type="text"], input[type="password"] { height: 42px; padding: 10px 13px; font-size: 14px; }
+}
