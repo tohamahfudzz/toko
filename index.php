@@ -321,3 +321,4 @@ if (is_dir($slideDir)) {
 <script src="script.js" defer></script>
 </body>
 </html>
+
