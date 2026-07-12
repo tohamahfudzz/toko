@@ -1,98 +1,89 @@
 <?php
 // register/index.php
+// Menampilkan form registrasi dan pesan status
 $status = $_GET['status'] ?? '';
-$pesan  = $_GET['pesan']  ?? '';
+$pesan  = $_GET['pesan'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Daftar Akun — Comp Store</title>
+  <title>Register</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container" role="main">
-
-    <!-- Logo area -->
-    <div class="logo-area">
-      <div class="logo-icon">🖥️</div>
-      <h2>Buat Akun Baru</h2>
-      <p class="subtitle">Bergabung dengan komunitas Comp Store</p>
-    </div>
+  <center>
+ 
 
     <?php if ($status === 'sukses'): ?>
-      <div class="success">
-        ✅ Registrasi berhasil! <a href="../loginuser/index.php">Klik di sini untuk login</a>.
+      <div style="color: green; background:#eaffea; padding:10px; border:1px solid green; width:60%; margin:8px auto;">
+        Registrasi berhasil! Silakan <a href="../loginuser/index.php">login</a>.
       </div>
     <?php elseif ($status === 'gagal'): ?>
-      <div class="errors">
-        <ul>
-          <?php if ($pesan === 'username_sudah_ada'): ?>
-            <li>Username sudah digunakan, coba yang lain.</li>
-          <?php elseif ($pesan === 'invalid_nomor'): ?>
-            <li>Format nomor WhatsApp tidak valid. Gunakan format <strong>+62xxx</strong> tanpa spasi.</li>
-          <?php else: ?>
-            <li>Registrasi gagal. Silakan coba lagi.</li>
-          <?php endif; ?>
-        </ul>
+      <div style="color: red; background:#ffeaea; padding:10px; border:1px solid red; width:60%; margin:8px auto;">
+        <?php if ($pesan === 'username_sudah_ada'): ?>
+          Username sudah digunakan!
+        <?php elseif ($pesan === 'invalid_nomor'): ?>
+          Format nomor WA tidak valid. Gunakan format +62xxxxxxxxxxx tanpa spasi.
+        <?php else: ?>
+          Registrasi gagal. Silakan coba lagi.
+        <?php endif; ?>
       </div>
     <?php endif; ?>
+  </center>
 
-    <form action="register.php" method="post" onsubmit="return validasi();">
-
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required placeholder="Buat username unik">
-
-      <label for="password">Password</label>
-      <div class="input-group">
-        <input type="password" id="password" name="password" required placeholder="Min. 8 karakter">
-        <button type="button" onclick="togglePassword()" aria-label="Tampilkan password">👁</button>
+  <div class="register" style="max-width:420px;margin:18px auto;padding:18px;border-radius:8px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
+      <h2>HALAMAN REGISTER</h2>
+  <form action="register.php" method="post" onsubmit="return validasi();">
+      <div>
+        <label>Username:</label>
+        <input type="text" name="username" id="username" required>
       </div>
 
-      <label for="nomor">Nomor WhatsApp</label>
-      <input type="text" id="nomor" name="nomor" placeholder="+6281234567890" required>
-      <p style="font-size:12.5px; color:#9ca3af; margin-top:5px;">Format: +62 diikuti angka, tanpa spasi atau tanda -</p>
+      <div style="margin-top:10px;">
+        <label>Password:</label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="password" name="password" id="password" required style="flex:1;">
+          <button type="button" onclick="togglePassword()" aria-label="Tampilkan password">👁</button>
+        </div>
+      </div>
 
-      <button type="submit">✅ Daftar Sekarang</button>
+      <div style="margin-top:10px;">
+        <label>Nomor whatsapp dengan format +62 tanpa spasi dan -:</label>
+        <input type="text" name="nomor" id="nomor" placeholder="+6281234567890" required>
+      </div>
+
+      <div style="margin-top:14px;">
+        <input type="submit" value="Register" class="tombol">
+      </div>
     </form>
-
-    <hr>
-
-    <div class="auth-links">
-      Sudah punya akun? <a href="../loginuser/index.php">Login di sini</a>
-    </div>
-
-    <div style="text-align:center; margin-top:14px; font-size:13px; color:#9ca3af;">
-      <a href="../index.php" style="color:#6b7280;">← Kembali ke Toko</a>
-    </div>
   </div>
 
 <script>
 function togglePassword() {
-  const input = document.getElementById('password');
-  input.type = input.type === 'password' ? 'text' : 'password';
+  var input = document.getElementById("password");
+  input.type = input.type === "password" ? "text" : "password";
 }
 
 function validasi() {
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value;
-  const nomor    = document.getElementById('nomor').value.trim();
+  var username = document.getElementById("username").value.trim();
+  var password = document.getElementById("password").value;
+  var nomor = document.getElementById("nomor").value.trim();
 
   if (!username || !password || !nomor) {
-    alert('Semua field harus diisi!');
+    alert("Semua field harus diisi!");
     return false;
   }
-  if (password.length < 8) {
-    alert('Password minimal 8 karakter.');
-    return false;
-  }
-  const re = /^\+62[0-9]{6,15}$/;
+
+  // Validasi nomor WA: harus mulai dengan +62 dan hanya angka setelahnya
+  var re = /^\+62[0-9]{6,15}$/;
   if (!re.test(nomor)) {
-    alert('Nomor WA tidak valid. Gunakan format +62 diikuti angka tanpa spasi.');
+    alert("Nomor WA tidak valid. Gunakan format +62 diikuti angka, tanpa spasi.");
     return false;
   }
+
   return true;
 }
 </script>
